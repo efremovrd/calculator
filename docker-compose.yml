@@ -1,0 +1,24 @@
+version: "3"
+
+
+services:
+
+    plus:
+        build: app/plus
+      
+    multiply:
+        build: app/multiply
+        
+    minus:
+        build: app/minus
+        
+    divide:
+        build: app/divide
+        
+    # TODO calculator:
+        # build: app/calculator
+        # depends_on:
+            # - plus
+            # - minus
+            # - multiply
+            # - divide
