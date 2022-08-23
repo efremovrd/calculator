@@ -15,10 +15,12 @@ services:
     divide:
         build: app/divide
         
-    # TODO calculator:
-        # build: app/calculator
-        # depends_on:
-            # - plus
-            # - minus
-            # - multiply
-            # - divide
+    calculator:
+        build: app/calculator
+        ports:
+            -   "5000:5000"
+        depends_on:
+            - plus
+            - minus
+            - multiply
+            - divide
