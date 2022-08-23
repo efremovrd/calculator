@@ -23,7 +23,7 @@ schema = QuerySchema()
 
 @app.route('/', methods=['POST'])
 def post():
-    form = request.args
+    form = request.form
     if schema.valid(form):
         abort(valid_args_num_error, valid_args_str_error)
     a = float(form['a'])
