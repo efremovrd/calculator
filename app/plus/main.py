@@ -15,13 +15,13 @@ app = Flask('plus')
 schema = QuerySchema()
 
 
-@app.route('/', methods=['GET'])
-def get():
-    args = request.args
-    if schema.validate(args):
+@app.route('/', methods=['POST'])
+def post():
+    form = request.form
+    if schema.validate(form):
         abort(valid_args_num_error, valid_args_str_error)
-    a = float(args['a'])
-    b = float(args['b'])
+    a = float(form['a'])
+    b = float(form['b'])
     return jsonify({'result': a+b})
 
 

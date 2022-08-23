@@ -17,17 +17,17 @@ valid_args_num_error = 400
 valid_args_str_error = 'Non valid arguments!\n'
 
 
-app = Flask('plus')
+app = Flask('divide')
 schema = QuerySchema()
 
 
-@app.route('/', methods=['GET'])
-def get():
-    args = request.args
-    if schema.valid(args):
+@app.route('/', methods=['POST'])
+def post():
+    form = request.args
+    if schema.valid(form):
         abort(valid_args_num_error, valid_args_str_error)
-    a = float(args['a'])
-    b = float(args['b'])
+    a = float(form['a'])
+    b = float(form['b'])
     return jsonify({'result': a/b})
 
 
