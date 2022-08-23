@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 from marshmallow import Schema, fields
+from abc import abstractmethod
 import requests
 
 
@@ -13,6 +14,7 @@ ok_req_status_code = 200
 
 
 class Command:
+    @abstractmethod
     def execute(self, a: float, b: float):
         raise NotImplementedError
 
