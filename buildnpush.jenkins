@@ -17,56 +17,56 @@ pipeline {
         stage("docker login") {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_efremovrd', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh 'docker login -u $USERNAME -p $PASSWORD'
+                    bat 'docker login -u $USERNAME -p $PASSWORD'
                 }
             }
         }
         
         stage("build") {
             steps {
-                sh 'docker-compose build'
+                bat 'docker-compose build'
             }
         }
         
         stage("rename") {
             steps {
-                sh 'docker tag calculator_calculator:latest efremovrd/calculator:calculator'
+                bat 'docker tag calculator_calculator:latest efremovrd/calculator:calculator'
                 
-                sh 'docker tag calculator_plus:latest efremovrd/calculator:plus'
+                bat 'docker tag calculator_plus:latest efremovrd/calculator:plus'
                 
-                sh 'docker tag calculator_multiply:latest efremovrd/calculator:multiply'
+                bat 'docker tag calculator_multiply:latest efremovrd/calculator:multiply'
                 
-                sh 'docker tag calculator_minus:latest efremovrd/calculator:minus'
+                bat 'docker tag calculator_minus:latest efremovrd/calculator:minus'
                 
-                sh 'docker tag calculator_divide:latest efremovrd/calculator:divide'
+                bat 'docker tag calculator_divide:latest efremovrd/calculator:divide'
             }
         }
         
         stage("push") {
             steps {
-                sh 'docker push efremovrd/calculator:calculator'
+                bat 'docker pubat efremovrd/calculator:calculator'
                     
-                sh 'docker push efremovrd/calculator:plus'
+                bat 'docker pubat efremovrd/calculator:plus'
                     
-                sh 'docker push efremovrd/calculator:multiply'
+                bat 'docker pubat efremovrd/calculator:multiply'
                     
-                sh 'docker push efremovrd/calculator:minus'
+                bat 'docker pubat efremovrd/calculator:minus'
                     
-                sh 'docker push efremovrd/calculator:divide'
+                bat 'docker pubat efremovrd/calculator:divide'
             }
         }
         
         stage("clean") {
             steps {
-                sh 'docker rmi calculator_calculator:latest'
+                bat 'docker rmi calculator_calculator:latest'
                     
-                sh 'docker rmi calculator_plus:latest'
+                bat 'docker rmi calculator_plus:latest'
                     
-                sh 'docker rmi calculator_multiply:latest'
+                bat 'docker rmi calculator_multiply:latest'
                     
-                sh 'docker rmi calculator_minus:latest'
+                bat 'docker rmi calculator_minus:latest'
                     
-                sh 'docker rmi calculator_divide:latest'
+                bat 'docker rmi calculator_divide:latest'
             }
         }
     }
