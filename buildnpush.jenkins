@@ -13,53 +13,61 @@ pipeline {
         timestamps()
     }
     
-    stages {    
+    stages {
+        stage("docker login") {
+            steps {
+                withCredentionals([usernamePassword(credentialsId: 'dockerhub_efremovrd', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    powershell(script: 'docker login -u $USERNAME -p $PASSWORD')
+                }
+            }
+        }
+        
         stage("build") {
             steps {
                 powershell(script: 'docker-compose build')
             }
         }
-		
-		stage("rename") {
-			steps {
-				powershell(script: 'docker tag calculator_calculator:latest efremovrd/calculator:calculator')
-				
-				powershell(script: 'docker tag calculator_plus:latest efremovrd/calculator:plus')
-				
-				powershell(script: 'docker tag calculator_multiply:latest efremovrd/calculator:multiply')
-				
-				powershell(script: 'docker tag calculator_minus:latest efremovrd/calculator:minus')
-				
-				powershell(script: 'docker tag calculator_divide:latest efremovrd/calculator:divide')
-			}
-		}
-		
-		stage("push") {
-			steps {
-				powershell(script: 'docker push efremovrd/calculator:calculator')
-					
-				powershell(script: 'docker push efremovrd/calculator:plus')
-					
-				powershell(script: 'docker push efremovrd/calculator:multiply')
-					
-				powershell(script: 'docker push efremovrd/calculator:minus')
-					
-				powershell(script: 'docker push efremovrd/calculator:divide')
-			}
-		}
-		
-		stage("clean") {
-			steps {
-				powershell(script: 'docker rmi calculator_calculator:latest')
-					
-				powershell(script: 'docker rmi calculator_plus:latest')
-					
-				powershell(script: 'docker rmi calculator_multiply:latest')
-					
-				powershell(script: 'docker rmi calculator_minus:latest')
-					
-				powershell(script: 'docker rmi calculator_divide:latest')
-			}
-		}
+        
+        stage("rename") {
+            steps {
+                powershell(script: 'docker tag calculator_calculator:latest efremovrd/calculator:calculator')
+                
+                powershell(script: 'docker tag calculator_plus:latest efremovrd/calculator:plus')
+                
+                powershell(script: 'docker tag calculator_multiply:latest efremovrd/calculator:multiply')
+                
+                powershell(script: 'docker tag calculator_minus:latest efremovrd/calculator:minus')
+                
+                powershell(script: 'docker tag calculator_divide:latest efremovrd/calculator:divide')
+            }
+        }
+        
+        stage("push") {
+            steps {
+                powershell(script: 'docker push efremovrd/calculator:calculator')
+                    
+                powershell(script: 'docker push efremovrd/calculator:plus')
+                    
+                powershell(script: 'docker push efremovrd/calculator:multiply')
+                    
+                powershell(script: 'docker push efremovrd/calculator:minus')
+                    
+                powershell(script: 'docker push efremovrd/calculator:divide')
+            }
+        }
+        
+        stage("clean") {
+            steps {
+                powershell(script: 'docker rmi calculator_calculator:latest')
+                    
+                powershell(script: 'docker rmi calculator_plus:latest')
+                    
+                powershell(script: 'docker rmi calculator_multiply:latest')
+                    
+                powershell(script: 'docker rmi calculator_minus:latest')
+                    
+                powershell(script: 'docker rmi calculator_divide:latest')
+            }
+        }
     }
 }
