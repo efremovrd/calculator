@@ -44,15 +44,15 @@ pipeline {
         
         stage("push") {
             steps {
-                bat 'docker pubat efremovrd/calculator:calculator'
+                bat 'docker push efremovrd/calculator:calculator'
                     
-                bat 'docker pubat efremovrd/calculator:plus'
+                bat 'docker push efremovrd/calculator:plus'
                     
-                bat 'docker pubat efremovrd/calculator:multiply'
+                bat 'docker push efremovrd/calculator:multiply'
                     
-                bat 'docker pubat efremovrd/calculator:minus'
+                bat 'docker push efremovrd/calculator:minus'
                     
-                bat 'docker pubat efremovrd/calculator:divide'
+                bat 'docker push efremovrd/calculator:divide'
             }
         }
         
