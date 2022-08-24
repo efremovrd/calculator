@@ -18,6 +18,10 @@ services:
     divide:
         build: app/divide
         image: efremovrd/calculator:divide
+
+    mod:
+        build: app/mod
+        image: efremovrd/calculator:mod
         
     calculator:
         build: app/calculator
@@ -29,3 +33,4 @@ services:
             - minus
             - multiply
             - divide
+            - mod
