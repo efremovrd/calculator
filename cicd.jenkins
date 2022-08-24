@@ -21,6 +21,12 @@ pipeline {
                 }
             }
         }
+
+        stage("stop app") {
+            steps {
+                bat 'docker-compose down'
+            }
+        }
         
         stage("build") {
             steps {
@@ -28,17 +34,9 @@ pipeline {
             }
         }
         
-        stage("rename") {
+        stage("start updated app") {
             steps {
-                bat 'docker tag calculator_calculator:latest efremovrd/calculator:calculator'
-                
-                bat 'docker tag calculator_plus:latest efremovrd/calculator:plus'
-                
-                bat 'docker tag calculator_multiply:latest efremovrd/calculator:multiply'
-                
-                bat 'docker tag calculator_minus:latest efremovrd/calculator:minus'
-                
-                bat 'docker tag calculator_divide:latest efremovrd/calculator:divide'
+                bat 'docker-compose up -d'
             }
         }
         
@@ -58,15 +56,7 @@ pipeline {
         
         stage("clean") {
             steps {
-                bat 'docker rmi calculator_calculator:latest'
-                    
-                bat 'docker rmi calculator_plus:latest'
-                    
-                bat 'docker rmi calculator_multiply:latest'
-                    
-                bat 'docker rmi calculator_minus:latest'
-                    
-                bat 'docker rmi calculator_divide:latest'
+                bat 'docker image prune -a -f'
             }
         }
     }
