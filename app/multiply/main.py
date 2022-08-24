@@ -7,7 +7,6 @@ class QuerySchema(Schema):
     b = fields.Number(required=True)
 
 
-#error
 valid_args_num_error = 400
 valid_args_str_error = 'Non valid arguments!\n'
 
