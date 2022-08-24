@@ -5,18 +5,23 @@ services:
 
     plus:
         build: app/plus
+        image: efremovrd/calculator:plus
       
     multiply:
         build: app/multiply
+        image: efremovrd/calculator:multiply
         
     minus:
         build: app/minus
+        image: efremovrd/calculator:minus
         
     divide:
         build: app/divide
+        image: efremovrd/calculator:divide
         
     calculator:
         build: app/calculator
+        image: efremovrd/calculator:calculator
         ports:
             -   "5000:5000"
         depends_on:
