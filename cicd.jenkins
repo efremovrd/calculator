@@ -53,6 +53,8 @@ pipeline {
                 bat 'docker push efremovrd/calculator:divide'
 
                 bat 'docker push efremovrd/calculator:mod'
+
+                bat 'docker push efremovrd/calculator:degree'
             }
         }
         

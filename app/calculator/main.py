@@ -55,6 +55,15 @@ class DivideCommand(Command):
             abort(valid_args_num_error, valid_args_str_error)
 
 
+class DegreeCommand(Command):
+    def execute(self, a: float, b: float):
+        req = requests.post(url=f'http://degree:5005', data={'a': a, 'b': b})
+        if req.status_code == ok_req_status_code:
+            return req.json()
+        else:
+            abort(valid_args_num_error, valid_args_str_error)
+
+
 class ModCommand(Command):
     def execute(self, a: float, b: float):
         req = requests.post(url=f'http://mod:5006', data={'a': a, 'b': b})
@@ -69,7 +78,7 @@ valid_args_str_error = 'Non valid arguments!\n'
 
 operations = {'+': PlusCommand(), '*': MultiplyCommand(),
               '-': MinusCommand(), '/': DivideCommand(),
-              '%': ModCommand()}
+              '%': ModCommand(), '**': DegreeCommand()}
 
 app = Flask('calculator')
 schema = QuerySchema()

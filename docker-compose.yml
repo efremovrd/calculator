@@ -19,6 +19,10 @@ services:
         build: app/divide
         image: efremovrd/calculator:divide
 
+    degree:
+        build: app/degree
+        image: efremovrd/calculator:degree
+
     mod:
         build: app/mod
         image: efremovrd/calculator:mod
